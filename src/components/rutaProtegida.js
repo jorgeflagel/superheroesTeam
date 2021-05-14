@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export default function RutaProtegida({ usuarioAutorizado, ...resto }) {
+export default function RutaProtegida({ usuarioAutorizado, children}) {
         return (
             <>
             {usuarioAutorizado
-                ? <Route {...resto}/>
+                ? <>{children}</>
                 : <Redirect to="/login" />
             }
             </>

@@ -31,9 +31,15 @@ function App() {
       <BarraDeNavegacion usuarioAutorizado={usuarioAutorizado} setUsuarioAutorizado={setUsuarioAutorizado} />
       <div className="App">
         <Switch>
-          <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/" component={Home} />
-          <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe" component={AgregarHeroe}/>
-          <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/heroes/:heroeId" component={DetallesHeroe} />
+          <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/">
+            <Home />
+          </RutaProtegida>
+          <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe">
+            <AgregarHeroe />
+          </RutaProtegida>
+          <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/heroes/:heroeId">
+            <DetallesHeroe />
+          </RutaProtegida>
           <Route path="/login">
             <Login setUsuarioAutorizado={setUsuarioAutorizado}/>
           </Route>        
