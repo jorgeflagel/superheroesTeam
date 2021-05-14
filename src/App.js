@@ -21,7 +21,7 @@ function App() {
 
   return (
     <Router>
-      <BarraDeNavegacion />
+      <BarraDeNavegacion usuarioAutorizado={usuarioAutorizado} setUsuarioAutorizado={setUsuarioAutorizado} />
       <div className="App">
         <Switch>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/" component={Home} />

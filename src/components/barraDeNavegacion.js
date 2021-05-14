@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-export default function BarraDeNavegacion() {
+export default function BarraDeNavegacion( { usuarioAutorizado, setUsuarioAutorizado } ) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -27,10 +27,19 @@ export default function BarraDeNavegacion() {
         setIsOpen(isOpen => !isOpen)
     }
 
+    const logout = () => {
+        localStorage.removeItem('tokenEquipoDeHeroes');
+        setUsuarioAutorizado(false);
+    }
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">Equipo de Héroes</Link>
+                {usuarioAutorizado 
+                    ? <button className="btn btn-danger ms-auto order-md-last me-3" onClick={logout}>Logout</button>
+                    : null}
                 <button ref={toggleButton} className="navbar-toggler" type="button" onClick={toggleNavbar} aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -45,6 +54,7 @@ export default function BarraDeNavegacion() {
                     </ul>
                 </div>
             </div>
+            
         </nav>
     )
 }
