@@ -17,7 +17,7 @@ const LoginSchema = Yup.object().shape({
 
 const FieldError = (msg) => <div className="alert alert-danger" role="alert">{msg.children}</div>;
 
-export default function Login() {new Promise(resolve => setTimeout(resolve, 500));
+export default function Login( { setUsuarioAutorizado } ) {new Promise(resolve => setTimeout(resolve, 500));
 
     const [errorMessage, setErrorMessage] = useState(null);
     const history = useHistory();
@@ -35,12 +35,12 @@ export default function Login() {new Promise(resolve => setTimeout(resolve, 500)
                     axios.post("http://challenge-react.alkemy.org/", values)
                         .then((resp) => {
                             localStorage.setItem("tokenEquipoDeHeroes", resp.data.token); 
+                            setUsuarioAutorizado(true);
                             history.push('/');
                             })
                         .catch((error) => setErrorMessage(error.response.data.error));
                     resetForm();
                     setSubmitting(false);
-
                     }}
             >
 

@@ -17,7 +17,7 @@ import RutaProtegida from './components/rutaProtegida';
 
 function App() {
 
-  const [usuarioAutorizado, setUsuarioAutorizado] = useState(true);
+  const [usuarioAutorizado, setUsuarioAutorizado] = useState(false);
 
   return (
     <Router>
@@ -27,7 +27,9 @@ function App() {
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/" component={Home} />
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe" component={AgregarHeroe}/>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/heroes/:heroeId" component={DetallesHeroe} />
-          <Route path="/login" component={Login} />        
+          <Route path="/login">
+            <Login setUsuarioAutorizado={setUsuarioAutorizado}/>
+          </Route>        
         </Switch>
       </div>
     </Router>
