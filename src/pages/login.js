@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
+import axios from 'axios';
+import { useHistory } from "react-router";
+
 
 import Spinning from '../components/spinning';
 
@@ -14,7 +17,11 @@ const LoginSchema = Yup.object().shape({
 
 const FieldError = (msg) => <div className="alert alert-danger" role="alert">{msg.children}</div>;
 
-export default function Login() {
+export default function Login() {new Promise(resolve => setTimeout(resolve, 500));
+
+    const [errorMessage, setErrorMessage] = useState(null);
+    const history = useHistory();
+
     return(
         <div className="p-5">
             <h1>Bienvenido!</h1>
@@ -22,11 +29,18 @@ export default function Login() {
                 initialValues={{ email: "", password: ""}}
                 validationSchema={LoginSchema}
                 onSubmit={async (values, {setSubmitting, resetForm}) => {
+                    setErrorMessage(null);
                     setSubmitting(true);
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    alert(JSON.stringify(values, null, 2));
+                    console.log(values);
+                    axios.post("http://challenge-react.alkemy.org/", values)
+                        .then((resp) => {
+                            localStorage.setItem("tokenEquipoDeHeroes", resp.data.token); 
+                            history.push('/');
+                            })
+                        .catch((error) => setErrorMessage(error.response.data.error));
                     resetForm();
                     setSubmitting(false);
+
                     }}
             >
 
@@ -48,7 +62,9 @@ export default function Login() {
                             ? <Spinning />
                             : "Login"}
                         </button>
-                        
+                        {errorMessage
+                            ? <div className="alert alert-danger my-3" role="alert">{errorMessage}</div>
+                            : null}
                     </Form>
             )}
             </Formik>
