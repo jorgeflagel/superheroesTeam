@@ -1,14 +1,22 @@
 import './App.css';
+import Login from './pages/login';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          App equipo de Superhéroes
-        </p>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/login">
+            <Login/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
