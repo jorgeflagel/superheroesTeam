@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Login from './pages/login';
 import Home from './pages/home';
@@ -17,7 +17,14 @@ import RutaProtegida from './components/rutaProtegida';
 
 function App() {
 
-  const [usuarioAutorizado, setUsuarioAutorizado] = useState(false);
+  const [usuarioAutorizado, setUsuarioAutorizado] = useState(true);
+
+  useEffect(() => {
+    var token = localStorage.getItem("tokenEquipoDeHeroes");
+    if (!token) {
+      setUsuarioAutorizado(false);
+    } 
+  }, [])
 
   return (
     <Router>
