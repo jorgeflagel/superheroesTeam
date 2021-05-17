@@ -10,7 +10,7 @@ import Card from '../components/card';
 //      si no hubo match: {response: "error", error: "character with given name not found"}
 
 
-export default function AgregarHeroe( { setEquipo, equipo }) {
+export default function AgregarHeroe( { setEquipo, equipo, totalPersonajesBuenos, setTotalPersonajesBuenos }) {
 
     const [ busqueda, setBusqueda ] = useState("");
     const [ resultados, setResultados ] = useState([]);
@@ -49,7 +49,7 @@ export default function AgregarHeroe( { setEquipo, equipo }) {
                     ?   <ul className="p-0 d-flex flex-wrap justify-content-around">
                             {resultados.map((heroe) => {
                                 return(
-                                    <Card {...heroe} setEquipo={setEquipo} equipo={equipo} />
+                                    <Card {...heroe} setEquipo={setEquipo} equipo={equipo} totalPersonajesBuenos={totalPersonajesBuenos} setTotalPersonajesBuenos={setTotalPersonajesBuenos}/>
                                 )})}
                         </ul>
                     : null}

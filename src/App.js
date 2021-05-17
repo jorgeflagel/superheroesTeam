@@ -19,6 +19,7 @@ function App() {
 
   const [usuarioAutorizado, setUsuarioAutorizado] = useState(true);
   const [equipo, setEquipo] = useState([]);
+  const [totalPersonajesBuenos, setTotalPersonajesBuenos] = useState(0);
 
   useEffect(() => {
     var token = localStorage.getItem("tokenEquipoDeHeroes");
@@ -36,7 +37,7 @@ function App() {
             <Home equipo={equipo} />
           </RutaProtegida>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe">
-            <AgregarHeroe setEquipo={setEquipo} equipo={equipo} />
+            <AgregarHeroe setEquipo={setEquipo} equipo={equipo} totalPersonajesBuenos={totalPersonajesBuenos} setTotalPersonajesBuenos={setTotalPersonajesBuenos} />
           </RutaProtegida>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/heroes/:heroeId">
             <DetallesHeroe />

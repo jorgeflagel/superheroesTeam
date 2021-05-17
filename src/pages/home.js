@@ -16,9 +16,9 @@ export default function Home({ equipo }) {
         combat: 0
     });
 
-    const agregarPowerstatsATotal = (heroePowerstats) => {
+    const agregarPowerstatsATotal = (heroePowerstats, alineamiento) => {
         for (const [power, valor] of Object.entries(heroePowerstats)) {
-            setPowerstatsTotal((powerstatsPrevio) => ({...powerstatsPrevio, [power]: powerstatsPrevio[`${power}`] + parseInt(valor)  }))
+            setPowerstatsTotal((powerstatsPrevio) => ({...powerstatsPrevio, [power]: powerstatsPrevio[`${power}`] + parseInt(valor) }));
           } 
     }
 
@@ -30,7 +30,7 @@ export default function Home({ equipo }) {
                 if (res.data.response === "success") {
                     setError(null);
                     setEquipoInfo((equipoPrevio) => [...equipoPrevio, res.data]);
-                    agregarPowerstatsATotal(res.data.powerstats)
+                    agregarPowerstatsATotal(res.data.powerstats, res.data.biography.alignment);
                 }
                 else {
                     setError(res.data.error);

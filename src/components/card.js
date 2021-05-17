@@ -1,9 +1,26 @@
 import React from 'react';
 
-export default function Card({image, name, id, setEquipo, equipo}) {
+export default function Card({image, name, id, biography, setEquipo, equipo, totalPersonajesBuenos, setTotalPersonajesBuenos}) {
 
     const agregarHeroe = (e) => {
-        setEquipo((equipoPrevio) => [...equipoPrevio, e.target.getAttribute("heroeId")])
+        let heroeId = e.target.getAttribute("heroeId")
+        if (equipo.length >= 6) alert("Tu equipo no puede tener más de 6 héroes");
+        else if (equipo.includes(heroeId)) {
+            alert("Este heroe ya pertenece a tu equipo");
+            alert(biography.alignment);      
+        }
+        else if (biography.alignment === "good" && totalPersonajesBuenos >= 3) {
+            alert("No puedes tener más de 3 héroes buenos en tu equipo");
+        }
+        else if (biography.alignment !== "good" && equipo.length - totalPersonajesBuenos >= 3) {
+            alert("No puedes tener más de 3 héroes malos en tu equipo");
+        }
+        else {
+            setEquipo((equipoPrevio) => [...equipoPrevio, heroeId]);
+            if (biography.alignment === "good") {
+                setTotalPersonajesBuenos((totalAnterior) => totalAnterior + 1);
+            }
+        }
     }
 
     return (
