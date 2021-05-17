@@ -18,6 +18,7 @@ import RutaProtegida from './components/rutaProtegida';
 function App() {
 
   const [usuarioAutorizado, setUsuarioAutorizado] = useState(true);
+  const [equipo, setEquipo] = useState([]);
 
   useEffect(() => {
     var token = localStorage.getItem("tokenEquipoDeHeroes");
@@ -32,10 +33,10 @@ function App() {
       <div className="App">
         <Switch>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/">
-            <Home />
+            <Home equipo={equipo} />
           </RutaProtegida>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe">
-            <AgregarHeroe />
+            <AgregarHeroe setEquipo={setEquipo} equipo={equipo} />
           </RutaProtegida>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/heroes/:heroeId">
             <DetallesHeroe />

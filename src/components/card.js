@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function Card({image, name, id}) {
+export default function Card({image, name, id, setEquipo, equipo}) {
+
+    const agregarHeroe = (e) => {
+        setEquipo((equipoPrevio) => [...equipoPrevio, e.target.getAttribute("heroeId")])
+    }
+
     return (
         <li key={id} className="card d-inline-block m-2" style={{width: "287px"}}>
             <img src={image.url} className="card-img-top" alt="" width={"287"} height={"380"} style={{"object-fit": "cover"}}/>
@@ -8,7 +13,7 @@ export default function Card({image, name, id}) {
                 <h2 className="card-title text-center">{name}</h2>
                 <p className="card-text"></p>
                 <div className="d-grid gap-2">
-                    <button className="btn btn-outline-dark btn-lg" type="button">Agregar Héroe</button>
+                    <button onClick={agregarHeroe} heroeId={id} className="btn btn-outline-dark btn-lg" type="button">Agregar Héroe</button>
                 </div>
             </div>
         </li>
