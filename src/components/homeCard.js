@@ -2,12 +2,12 @@ import React from 'react';
 import sortObject from '../utils/sortObject';
 import removeItem from '../utils/removeItem'
 ;
-export default function HomeCard( {image, name, id, powerstats, setEquipo, biography, setTotalPersonajesBuenos} ) {
+export default function HomeCard( {image, name, id, powerstats, setTeam, biography, setGoodHeroesTotal} ) {
 
-    const eliminarHeroe = (id, alignment) => {
-        setEquipo((equipoPrevio) => [...removeItem(equipoPrevio, id)]);
+    const eliminateHeroe = (id, alignment) => {
+        setTeam((previousTeam) => [...removeItem(previousTeam, id)]);
         if(alignment === "good") {
-            setTotalPersonajesBuenos((totalPrevio) => totalPrevio - 1)
+            setGoodHeroesTotal((previousTotal) => previousTotal - 1)
         } 
     }  
 
@@ -24,7 +24,7 @@ export default function HomeCard( {image, name, id, powerstats, setEquipo, biogr
                             {sortObject(powerstats, "descendent").map((power) => <li><b>{power[0].toUpperCase()}:</b> {power[1]}</li>)}
                         </ul>
                         <div className="d-grid gap-2">
-                            <button onClick={() => eliminarHeroe(id, biography.alignment)} className="btn btn-outline-dark btn-lg" type="button">Eliminar Héroe</button>
+                            <button onClick={() => eliminateHeroe(id, biography.alignment)} className="btn btn-outline-dark btn-lg" type="button">Eliminate Superhero</button>
                         </div>
                     </div>
                 </div>

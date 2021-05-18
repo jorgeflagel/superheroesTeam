@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-export default function RutaProtegida({ usuarioAutorizado, children}) {
+export default function ProtectedRoute({ authorizedUser, children}) {
         return (
             <>
-            {usuarioAutorizado
+            {authorizedUser
                 ? <>{children}</>
                 : <Redirect to="/login" />
             }

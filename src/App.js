@@ -8,42 +8,42 @@ import React, { useState, useEffect } from 'react';
 
 import Login from './pages/login';
 import Home from './pages/home';
-import AgregarHeroe from './pages/agregarHeroe';
-import DetallesHeroe from './pages/detallesHeroe';
+import AddHeroes from './pages/addHeroes';
+import HeroDetails from './pages/heroDetails';
 
-import BarraDeNavegacion from './components/barraDeNavegacion';
-import RutaProtegida from './components/rutaProtegida';
+import NavigationBar from './components/navigationBar';
+import ProtectedRoute from './components/protectedRoute';
 
 
 function App() {
 
-  const [usuarioAutorizado, setUsuarioAutorizado] = useState(true);
-  const [equipo, setEquipo] = useState([]);
-  const [totalPersonajesBuenos, setTotalPersonajesBuenos] = useState(0);
+  const [authorizedUser, setAuthorizedUser] = useState(true);
+  const [team, setTeam] = useState([]);
+  const [goodHeroesTotal, setGoodHeroesTotal] = useState(0);
 
   useEffect(() => {
-    var token = localStorage.getItem("tokenEquipoDeHeroes");
+    var token = localStorage.getItem("tokenHeroesTeam");
     if (!token) {
-      setUsuarioAutorizado(false);
+      setAuthorizedUser(false);
     } 
   }, [])
 
   return (
     <Router>
-      <BarraDeNavegacion usuarioAutorizado={usuarioAutorizado} setUsuarioAutorizado={setUsuarioAutorizado} />
+      <NavigationBar authorizedUser={authorizedUser} setAuthorizedUser={setAuthorizedUser} />
       <div className="App">
         <Switch>
-          <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/">
-            <Home equipo={equipo} setEquipo={setEquipo} setTotalPersonajesBuenos={setTotalPersonajesBuenos}/>
-          </RutaProtegida>
-          <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe">
-            <AgregarHeroe setEquipo={setEquipo} equipo={equipo} totalPersonajesBuenos={totalPersonajesBuenos} setTotalPersonajesBuenos={setTotalPersonajesBuenos} />
-          </RutaProtegida>
-          <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/heroes/:heroeId">
-            <DetallesHeroe />
-          </RutaProtegida>
+          <ProtectedRoute authorizedUser={authorizedUser} exact path="/">
+            <Home team={team} setTeam={setTeam} setGoodHeroesTotal={setGoodHeroesTotal}/>
+          </ProtectedRoute>
+          <ProtectedRoute authorizedUser={authorizedUser} path="/addHeroes">
+            <AddHeroes setTeam={setTeam} team={team} goodHeroesTotal={goodHeroesTotal} setGoodHeroesTotal={setGoodHeroesTotal} />
+          </ProtectedRoute>
+          <ProtectedRoute authorizedUser={authorizedUser} path="/heroes/:heroId">
+            <HeroDetails />
+          </ProtectedRoute>
           <Route path="/login">
-            <Login setUsuarioAutorizado={setUsuarioAutorizado}/>
+            <Login setAuthorizedUser={setAuthorizedUser}/>
           </Route>        
         </Switch>
       </div>

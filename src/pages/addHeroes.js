@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-import Card from '../components/card';
+import AddHeroesCard from '../components/addHeroesCard';
 
 // Para buscar a un superheroe:
 // https://superheroapi.com/api/access-token/search/name ======> la busqueda devuelve un objeto 
@@ -10,20 +10,20 @@ import Card from '../components/card';
 //      si no hubo match: {response: "error", error: "character with given name not found"}
 
 
-export default function AgregarHeroe( { setEquipo, equipo, totalPersonajesBuenos, setTotalPersonajesBuenos }) {
+export default function AddHeroes( { setTeam, team, goodHeroesTotal, setGoodHeroesTotal }) {
 
-    const [ busqueda, setBusqueda ] = useState("");
-    const [ resultados, setResultados ] = useState([]);
+    const [ search, setSearch ] = useState("");
+    const [ results, setResults ] = useState([]);
     const [ error, setError ] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setResultados([]);
-        axios.get(`https://www.superheroapi.com/api.php/${process.env.REACT_APP_API_TOKEN}/search/${busqueda}`)
+        setResults([]);
+        axios.get(`https://www.superheroapi.com/api.php/${process.env.REACT_APP_API_TOKEN}/search/${search}`)
             .then((res) => {
                 if (res.data.response === "success") {
                     setError(null);
-                    setResultados(res.data.results);
+                    setResults(res.data.results);
                 }
                 else {
                     setError(res.data.error);
@@ -35,21 +35,21 @@ export default function AgregarHeroe( { setEquipo, equipo, totalPersonajesBuenos
 
     return (
         <div className="m-3">
-            <h1>Buscar y agregar héroe</h1>
+            <h1>Search and Add Superheroes</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                    <label htmlFor="buscarHeroes" className="form-label">Buscar Héroes</label>
-                    <input type="text" className="form-control" id="buscarHeroes" aria-describedby="buscarHeroes" 
-                        onChange={(e) => setBusqueda(e.target.value)} value={busqueda}/>
+                    <label htmlFor="searchHeroes" className="form-label">Search Superheroes</label>
+                    <input type="text" className="form-control" id="searchHeroes" aria-describedby="Search Heroes" 
+                        onChange={(e) => setSearch(e.target.value)} value={search}/>
                 </div>
-                <button type="submit" className="btn btn-primary">Buscar</button>
+                <button type="submit" className="btn btn-primary">Search</button>
             </form>
             <div className="mt-5">
-                {resultados 
+                {results 
                     ?   <ul className="p-0 d-flex flex-wrap justify-content-around">
-                            {resultados.map((heroe) => {
+                            {results.map((hero) => {
                                 return(
-                                    <Card {...heroe} setEquipo={setEquipo} equipo={equipo} totalPersonajesBuenos={totalPersonajesBuenos} setTotalPersonajesBuenos={setTotalPersonajesBuenos}/>
+                                    <AddHeroesCard {...hero} setTeam={setTeam} team={team} goodHeroesTotal={goodHeroesTotal} setGoodHeroesTotal={setGoodHeroesTotal}/>
                                 )})}
                         </ul>
                     : null}

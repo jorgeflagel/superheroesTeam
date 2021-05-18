@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-export default function BarraDeNavegacion( { usuarioAutorizado, setUsuarioAutorizado } ) {
+export default function NavigationBar( { authorizedUser, setAuthorizedUser } ) {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -28,16 +28,16 @@ export default function BarraDeNavegacion( { usuarioAutorizado, setUsuarioAutori
     }
 
     const logout = () => {
-        localStorage.removeItem('tokenEquipoDeHeroes');
-        setUsuarioAutorizado(false);
+        localStorage.removeItem('tokenHeroesTeam');
+        setAuthorizedUser(false);
     }
 
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
 
             <div className="container-fluid">
-                <Link className="navbar-brand" to="/">Equipo de Héroes</Link>
-                {usuarioAutorizado 
+                <Link className="navbar-brand" to="/">Superheroes Team</Link>
+                {authorizedUser 
                     ? <button className="btn btn-danger ms-auto order-md-last me-3" onClick={logout}>Logout</button>
                     : null}
                 <button ref={toggleButton} className="navbar-toggler" type="button" onClick={toggleNavbar} aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +48,8 @@ export default function BarraDeNavegacion( { usuarioAutorizado, setUsuarioAutori
                         <NavLink exact to={"/"} className="nav-link" activeClassName="active" onClick={toggleNavbar}>
                             Home
                         </NavLink>
-                        <NavLink to={"/agregarHeroe"} className="nav-link" activeClassName="active" onClick={toggleNavbar}>
-                            Agregar Heroe
+                        <NavLink to={"/addHeroes"} className="nav-link" activeClassName="active" onClick={toggleNavbar}>
+                            Add Superheroe
                         </NavLink>
                     </ul>
                 </div>

@@ -9,22 +9,22 @@ import Spinning from '../components/spinning';
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
-      .email('No es un email válido')
-      .required('Requerido'),
+      .email('It is not a valid email')
+      .required('Required'),
     password: Yup.string()
-      .required('Requerido'), 
+      .required('Required'), 
   });
 
 const FieldError = (msg) => <div className="alert alert-danger" role="alert">{msg.children}</div>;
 
-export default function Login( { setUsuarioAutorizado } ) {new Promise(resolve => setTimeout(resolve, 500));
+export default function Login( { setAuthorizedUser } ) {
 
     const [errorMessage, setErrorMessage] = useState(null);
     const history = useHistory();
 
     return(
         <div className="p-5">
-            <h1>Bienvenido!</h1>
+            <h1>Welcome!</h1>
             <Formik
                 initialValues={{ email: "", password: ""}}
                 validationSchema={LoginSchema}
@@ -34,8 +34,8 @@ export default function Login( { setUsuarioAutorizado } ) {new Promise(resolve =
                     console.log(values);
                     axios.post("http://challenge-react.alkemy.org/", values)
                         .then((resp) => {
-                            localStorage.setItem("tokenEquipoDeHeroes", resp.data.token); 
-                            setUsuarioAutorizado(true);
+                            localStorage.setItem("tokenHeroesTeam", resp.data.token); 
+                            setAuthorizedUser(true);
                             history.push('/');
                             })
                         .catch((error) => setErrorMessage(error.response.data.error));
@@ -49,12 +49,12 @@ export default function Login( { setUsuarioAutorizado } ) {new Promise(resolve =
                     <Form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email</label>
-                            <Field type="email" name="email" id="email" placeholder="Escribe tu email..." className="form-control"/>
+                            <Field type="email" name="email" id="email" placeholder="Write your email..." className="form-control"/>
                             <ErrorMessage name="email" component={FieldError}/>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <Field type="password" name="password" id="password" placeholder="Escribe tu password..." className="form-control"/>
+                            <Field type="password" name="password" id="password" placeholder="Write your password..." className="form-control"/>
                             <ErrorMessage name="password" component={FieldError}/>
                         </div>
                         <button className="btn btn-primary">
