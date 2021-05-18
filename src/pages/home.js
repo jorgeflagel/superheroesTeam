@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 import sortObject from '../utils/sortObject';
+import HomeCard from '../components/homeCard';
 
-export default function Home({ equipo }) {
+export default function Home({ equipo, setEquipo, setTotalPersonajesBuenos }) {
 
     const [equipoInfo, setEquipoInfo] = useState([]);
     const [error, setError] = useState(null);
@@ -16,7 +17,7 @@ export default function Home({ equipo }) {
         combat: 0
     });
 
-    const agregarPowerstatsATotal = (heroePowerstats, alineamiento) => {
+    const agregarPowerstatsATotal = (heroePowerstats) => {
         for (const [power, valor] of Object.entries(heroePowerstats)) {
             setPowerstatsTotal((powerstatsPrevio) => ({...powerstatsPrevio, [power]: powerstatsPrevio[`${power}`] + parseInt(valor) }));
           } 
@@ -24,6 +25,15 @@ export default function Home({ equipo }) {
 
     useEffect(() => {
         setError(null);
+        setEquipoInfo([]);
+        setPowerstatsTotal({
+            intelligence: 0,
+            strength: 0,
+            speed: 0,
+            durability: 0,
+            power: 0,
+            combat: 0
+        })
         equipo.forEach((id) => {     
             axios.get(`https://www.superheroapi.com/api.php/${process.env.REACT_APP_API_TOKEN}/${id}`)
             .then((res) => {
@@ -41,20 +51,15 @@ export default function Home({ equipo }) {
 
     return (
         <div>
-            <h1>Página Home</h1>
+            <h1>Tu equipo</h1>
             <h2>Powerstats Total</h2>
             <ul>
                 {sortObject(powerstatsTotal, "descendent").map((power) => <li>{power[0]}: {power[1]}</li>)}
             </ul>
-            <ul>
+            <ul className="p-0 d-flex flex-wrap justify-content-around">
                 {equipoInfo.map((heroe) => {
                     return(
-                        <li key={heroe.id}>
-                            <h2>{heroe.name}</h2>
-                            <img src={heroe.image.url} alt=""/>
-                            <p>{JSON.stringify(heroe.powerstats)}</p>
-                            
-                        </li>
+                        <HomeCard {...heroe}  setEquipo={setEquipo} setTotalPersonajesBuenos={setTotalPersonajesBuenos} />
                         )
                     })
                 }

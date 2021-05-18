@@ -34,7 +34,7 @@ function App() {
       <div className="App">
         <Switch>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} exact path="/">
-            <Home equipo={equipo} />
+            <Home equipo={equipo} setEquipo={setEquipo} setTotalPersonajesBuenos={setTotalPersonajesBuenos}/>
           </RutaProtegida>
           <RutaProtegida usuarioAutorizado={usuarioAutorizado} path="/agregarheroe">
             <AgregarHeroe setEquipo={setEquipo} equipo={equipo} totalPersonajesBuenos={totalPersonajesBuenos} setTotalPersonajesBuenos={setTotalPersonajesBuenos} />
