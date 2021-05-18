@@ -19,7 +19,7 @@ export default function Home({ team, setTeam, setGoodHeroesTotal }) {
 
     const addPowerstatsToTotal = (heroPowerstats) => {
         for (const [power, value] of Object.entries(heroPowerstats)) {
-            setPowerstatsTotal((previousPowerstats) => ({...previousPowerstats, [power]: previousPowerstats[`${power}`] + (parseInt(value))}));
+            setPowerstatsTotal((previousPowerstats) => ({...previousPowerstats, [power]: previousPowerstats[`${power}`] + (parseInt(value) | 0)}));
           } 
     }
 
