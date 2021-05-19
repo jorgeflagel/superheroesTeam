@@ -7,7 +7,7 @@ export default function HomeCard( {image, name, id, powerstats, setTeam, biograp
     const eliminateHeroe = (id, alignment) => {
         setTeam((previousTeam) => [...removeItem(previousTeam, id)]);
         if(alignment === "good") {
-            setGoodHeroesTotal((previousTotal) => previousTotal - 1)
+            setGoodHeroesTotal((previousTotal) => previousTotal - 1);
         } 
     }  
 
@@ -24,7 +24,7 @@ export default function HomeCard( {image, name, id, powerstats, setTeam, biograp
                             {sortObject(powerstats, "descendent").map((power) => <li><b>{power[0].toUpperCase()}:</b> {power[1]}</li>)}
                         </ul>
                         <div className="d-grid gap-2">
-                            <button onClick={() => eliminateHeroe(id, biography.alignment)} className="btn btn-outline-dark btn-lg" type="button">Eliminate Superhero</button>
+                            <button onClick={() => eliminateHeroe(id, biography.alignment)} className="btn btn-outline-dark btn-lg" type="button">Eliminate Heroe</button>
                         </div>
                     </div>
                 </div>

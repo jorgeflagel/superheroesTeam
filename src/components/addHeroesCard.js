@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function AddHeroesCard({image, name, id, biography, setTeam, team, goodHeroesTotal, setGoodHeroesTotal}) {
+export default function AddHeroesCard({image, name, id, biography, setTeam, team, goodHeroesTotal, setGoodHeroesTotal, appearance, work}) {
 
     const addHero = (e) => {
         let heroId = e.target.getAttribute("heroId")
@@ -30,6 +31,7 @@ export default function AddHeroesCard({image, name, id, biography, setTeam, team
                 <p className="card-text"></p>
                 <div className="d-grid gap-2">
                     <button onClick={addHero} heroId={id} className="btn btn-outline-dark btn-lg" type="button">Add Superhero</button>
+                    <Link to={`/heroes/${id}`} className="btn btn-outline-secondary btn-lg" type="button">View Details</Link>
                 </div>
             </div>
         </li>

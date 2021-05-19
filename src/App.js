@@ -21,6 +21,9 @@ function App() {
   const [team, setTeam] = useState([]);
   const [goodHeroesTotal, setGoodHeroesTotal] = useState(0);
 
+  const [ results, setResults ] = useState([]);
+  const [ search, setSearch ] = useState("");
+
   useEffect(() => {
     var token = localStorage.getItem("tokenHeroesTeam");
     if (!token) {
@@ -37,7 +40,8 @@ function App() {
             <Home team={team} setTeam={setTeam} setGoodHeroesTotal={setGoodHeroesTotal}/>
           </ProtectedRoute>
           <ProtectedRoute authorizedUser={authorizedUser} path="/addHeroes">
-            <AddHeroes setTeam={setTeam} team={team} goodHeroesTotal={goodHeroesTotal} setGoodHeroesTotal={setGoodHeroesTotal} />
+            <AddHeroes setTeam={setTeam} team={team} goodHeroesTotal={goodHeroesTotal} setGoodHeroesTotal={setGoodHeroesTotal}
+              results={results} setResults={setResults} search={search} setSearch={setSearch}/>
           </ProtectedRoute>
           <ProtectedRoute authorizedUser={authorizedUser} path="/heroes/:heroId">
             <HeroDetails />

@@ -10,10 +10,9 @@ import AddHeroesCard from '../components/addHeroesCard';
 //      si no hubo match: {response: "error", error: "character with given name not found"}
 
 
-export default function AddHeroes( { setTeam, team, goodHeroesTotal, setGoodHeroesTotal }) {
+export default function AddHeroes( { setTeam, team, goodHeroesTotal, setGoodHeroesTotal, results, setResults, search, setSearch }) {
 
-    const [ search, setSearch ] = useState("");
-    const [ results, setResults ] = useState([]);
+    
     const [ error, setError ] = useState(null);
 
     const handleSubmit = (e) => {
@@ -24,6 +23,7 @@ export default function AddHeroes( { setTeam, team, goodHeroesTotal, setGoodHero
                 if (res.data.response === "success") {
                     setError(null);
                     setResults(res.data.results);
+                    setSearch("");
                 }
                 else {
                     setError(res.data.error);
