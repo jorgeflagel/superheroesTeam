@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-import sortObject from '../utils/sortObject';
 import HomeCard from '../components/homeCard';
+import PowerstatsTotal from '../components/powerstatsTotal';
 
 export default function Home({ team, setTeam, setGoodHeroesTotal }) {
 
@@ -52,10 +52,7 @@ export default function Home({ team, setTeam, setGoodHeroesTotal }) {
     return (
         <div>
             <h1 className="text-center">Your Team of Superheroes</h1>
-            <h2 className="text-center">Powerstats Total</h2>
-            <ul>
-                {sortObject(powerstatsTotal, "descendent").map((power) => <li>{power[0]}: {power[1]}</li>)}
-            </ul>
+            <PowerstatsTotalCard powerstatsTotal={powerstatsTotal} numHeroes={team.length}/>
             <ul className="p-0 d-flex flex-wrap justify-content-around">
                 {teamInfo.map((heroe) => {
                     return(
