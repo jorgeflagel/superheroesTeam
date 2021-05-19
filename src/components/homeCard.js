@@ -18,12 +18,12 @@ export default function HomeCard( {image, name, id, powerstats, setTeam, biograp
                     <img src={image.url} alt="..." style={{objectFit: "cover", width: "100%"}}/>
                 </div>
                 <div className="col-sm-6">
-                    <div className="card-body">
+                    <div className="card-body d-flex flex-column justify-content-between" style={{height: "100%"}}>
                         <h3 className="card-title text-center">{name}</h3>
                         <ul className="card-text list-unstyled">
                             {sortObject(powerstats, "descendent").map((power) => <li><b>{power[0].toUpperCase()}:</b> {power[1]}</li>)}
                         </ul>
-                        <div className="d-grid gap-2">
+                        <div className="d-grid gap-2 mt-3">
                             <button onClick={() => eliminateHeroe(id, biography.alignment)} className="btn btn-outline-dark btn-lg" type="button">Eliminate Heroe</button>
                         </div>
                     </div>

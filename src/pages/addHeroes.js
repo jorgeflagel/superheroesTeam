@@ -35,7 +35,7 @@ export default function AddHeroes( { setTeam, team, goodHeroesTotal, setGoodHero
 
     return (
         <div className="m-3">
-            <h1 className="text-center">Search and Add Superheroes</h1>
+            <h1 className="text-center mt-5">Search and Add Superheroes</h1>
             <form onSubmit={handleSubmit}>
                 <div className="row mb-3 align-items-center">
                     <div className="text-md-end col-12 col-md-4">

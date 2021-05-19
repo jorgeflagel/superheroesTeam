@@ -10,8 +10,11 @@ export default function PowerstatsTotal( { powerstatsTotal, numHeroes } ) {
         else if (porcentage < 70) {
             return "bg-warning"
         }
-        else {
+        else if (porcentage <= 100) {
             return "bg-success"
+        }
+        else {
+            return "bg-info"
         }
     }
 
