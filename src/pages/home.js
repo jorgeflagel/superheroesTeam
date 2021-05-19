@@ -51,8 +51,8 @@ export default function Home({ team, setTeam, setGoodHeroesTotal }) {
 
     return (
         <div>
-            <h1 className="text-center">Your Team of Superheroes</h1>
-            <PowerstatsTotalCard powerstatsTotal={powerstatsTotal} numHeroes={team.length}/>
+            <h1 className="text-center mt-5">Your Team of Superheroes</h1>
+            <PowerstatsTotal powerstatsTotal={powerstatsTotal} numHeroes={team.length}/>
             <ul className="p-0 d-flex flex-wrap justify-content-around">
                 {teamInfo.map((heroe) => {
                     return(
