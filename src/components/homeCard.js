@@ -12,12 +12,12 @@ export default function HomeCard( {image, name, id, powerstats, setTeam, biograp
     }  
 
     return (
-        <li className="card m-3" style={{maxWidth: "540px"}} key={id}>
+        <li className="card m-5" style={{maxWidth: "540px"}} key={id}>
             <div className="row g-0">
-                <div className="col-md-6">
+                <div className="col-sm-6">
                     <img src={image.url} alt="..." style={{objectFit: "cover", width: "100%"}}/>
                 </div>
-                <div className="col-md-6">
+                <div className="col-sm-6">
                     <div className="card-body">
                         <h3 className="card-title text-center">{name}</h3>
                         <ul className="card-text list-unstyled">

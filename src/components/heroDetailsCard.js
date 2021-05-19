@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function HeroDetailsCard( { heroInfo }) {
     return (
-        <div className="card mx-auto my-5" style={{maxWidth: "800px"}}>
+        <div className="card m-5 mx-md-auto" style={{maxWidth: "800px"}}>
             <div className="row g-0">
-                <div className="col-md-6">
+                <div className="col-sm-6">
                     <img src={heroInfo.image.url} alt="" style={{objectFit: "cover", width: "100%", height: "100%"}}/>
                 </div>
-                <div className="col-md-6">
+                <div className="col-sm-6">
                     <div className="card-body">
                         <h3 className="card-title text-center">{heroInfo.name}</h3>
                         <p><b>Aliases: </b>{heroInfo.biography.aliases.map((alias) => <><br />{alias}</>)}</p>
