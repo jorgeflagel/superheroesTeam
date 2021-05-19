@@ -34,7 +34,7 @@ function App() {
   return (
     <Router>
       <NavigationBar authorizedUser={authorizedUser} setAuthorizedUser={setAuthorizedUser} />
-      <div className="App">
+      <div className="App container">
         <Switch>
           <ProtectedRoute authorizedUser={authorizedUser} exact path="/">
             <Home team={team} setTeam={setTeam} setGoodHeroesTotal={setGoodHeroesTotal}/>

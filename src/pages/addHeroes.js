@@ -35,14 +35,21 @@ export default function AddHeroes( { setTeam, team, goodHeroesTotal, setGoodHero
 
     return (
         <div className="m-3">
-            <h1>Search and Add Superheroes</h1>
+            <h1 className="text-center">Search and Add Superheroes</h1>
             <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="searchHeroes" className="form-label">Search Superheroes</label>
-                    <input type="text" className="form-control" id="searchHeroes" aria-describedby="Search Heroes" 
-                        onChange={(e) => setSearch(e.target.value)} value={search}/>
+                <div className="row mb-3 align-items-center">
+                    <div className="text-md-end col-12 col-md-4">
+                        <label htmlFor="searchHeroes" className="form-label">Search Superheroes: </label>
+                    </div>
+                    <div className="col-12 col-md-5 col-xl-4">
+                        <input type="text" className="form-control col-12 col-md-6 col-xl-2" id="searchHeroes" aria-describedby="Search Heroes" 
+                            onChange={(e) => setSearch(e.target.value)} value={search}/>
+                    </div>
+                    <div className="col-12 col-md-1 my-3">
+                        <button type="submit" className="btn btn-primary">Search</button>   
+                    </div>
                 </div>
-                <button type="submit" className="btn btn-primary">Search</button>
+                
             </form>
             <div className="mt-5">
                 {results 

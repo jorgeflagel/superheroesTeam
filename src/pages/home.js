@@ -51,8 +51,8 @@ export default function Home({ team, setTeam, setGoodHeroesTotal }) {
 
     return (
         <div>
-            <h1>Your Team of Superheroes</h1>
-            <h2>Powerstats Total</h2>
+            <h1 className="text-center">Your Team of Superheroes</h1>
+            <h2 className="text-center">Powerstats Total</h2>
             <ul>
                 {sortObject(powerstatsTotal, "descendent").map((power) => <li>{power[0]}: {power[1]}</li>)}
             </ul>
