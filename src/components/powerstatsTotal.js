@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import sortObject from '../utils/sortObject';
 
 export default function PowerstatsTotal( { powerstatsTotal, numHeroes } ) {
